@@ -1,88 +1,138 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JRadioButton;
+import javax.swing.JList;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+//import com.jgoodies.forms.layout.FormLayout;
+//import com.jgoodies.forms.layout.ColumnSpec;
+//import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.JRadioButton;
 
 @SuppressWarnings("serial")
 public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 
 	private JPanel contentPane;
 	private ActionListener actionListener;
-	private JTextField textFieldUsername;
-	private JTextField textFieldIP;
-	private JTextField textFieldPuerto;
+	private JLabel lblNewLabel;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JLabel lblNewLabel_1;
+	private JTextField textFieldNombre;
+	private JLabel lblNewLabel_2;
+	private JRadioButton rdbtnNewRadioButton;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JLabel lblNewLabel_3;
+	private JList list;
 	private JButton btnIniciarChat;
 	private JButton btnSolicitarChat;
+	private JPanel panel_4;
+	private JLabel lblNewLabel_4;
+	private JTextField textFieldIP;
+	private JTextField textFieldPuerto;
 
-	public static void main(String[] args)	// TODO: Sacar este main de aca
+	
+	public static void main(String[] args)
 	{
+		
 		VentanaPrincipal window = new VentanaPrincipal();
 	}
 	
 	
 	public VentanaPrincipal() {
-		setTitle("Chat App");
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 481, 419);
+		setBounds(300, 300, 474, 414);
 		this.contentPane = new JPanel();
-		contentPane.setForeground(Color.BLACK);
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(this.contentPane);
 		
-		JLabel lblNewLabel = new JLabel("CHAT APP");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel = new JLabel("CHAT APP");
 		lblNewLabel.setForeground(new Color(255, 0, 0));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblNewLabel, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel_1 = new JLabel("Usuario / IP");
+		panel = new JPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		panel_1 = new JPanel();
+		panel.add(panel_1, BorderLayout.NORTH);
+		panel_1.setLayout(new GridLayout(3, 2, 0, 0));
+		
+		lblNewLabel_1 = new JLabel("Nombre de Usuario");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Nombre de Usuario");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		textFieldNombre = new JTextField();
+		panel_1.add(textFieldNombre);
+		textFieldNombre.setColumns(10);
 		
-		textFieldUsername = new JTextField();
-		textFieldUsername.setColumns(10);
+		lblNewLabel_2 = new JLabel("Escucha Habilitada");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Escucha Habilitada");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		rdbtnNewRadioButton = new JRadioButton("");
+		panel_1.add(rdbtnNewRadioButton);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		panel_2 = new JPanel();
+		panel.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JLabel lblNewLabel_4 = new JLabel("Solicitudes Entrantes");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 13));
+		panel_3 = new JPanel();
+		panel_2.add(panel_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("");
-		rdbtnNewRadioButton.setSelected(false);
+		lblNewLabel_3 = new JLabel("Solicitudes Entrantes");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_3.add(lblNewLabel_3, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel_5 = new JLabel("Direccion IP");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 13));
-		
-		JLabel lblNewLabel_6 = new JLabel("Puerto IP");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 13));
+		list = new JList();
+		panel_3.add(list, BorderLayout.CENTER);
 		
 		btnIniciarChat = new JButton("Iniciar Chat");
 		btnIniciarChat.setEnabled(false);
+		panel_3.add(btnIniciarChat, BorderLayout.SOUTH);
 		
-		this.btnSolicitarChat = new JButton("Solicitar Chat");
-		this.btnSolicitarChat.setEnabled(false);
+		panel_4 = new JPanel();
+		panel_2.add(panel_4);
+		
+		lblNewLabel_4 = new JLabel("Direccion IP");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		btnSolicitarChat = new JButton("Solicitar Chat");
+		btnSolicitarChat.setEnabled(false);
 		
 		textFieldIP = new JTextField();
 		textFieldIP.setColumns(10);
@@ -91,89 +141,42 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 		textFieldPuerto = new JTextField();
 		textFieldPuerto.setColumns(10);
 		textFieldPuerto.addKeyListener(this);
-
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(38)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_4)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(10)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblNewLabel_3)
-						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(rdbtnNewRadioButton)
-								.addComponent(textFieldUsername, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE))
-							.addGap(76))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblNewLabel_5)
-								.addComponent(lblNewLabel_6)
-								.addComponent(textFieldPuerto, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-								.addComponent(textFieldIP)
-								.addComponent(btnSolicitarChat, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(30))))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(154)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(181, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(178)
-					.addComponent(lblNewLabel_1)
-					.addContainerGap(211, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(58)
-					.addComponent(btnIniciarChat)
-					.addContainerGap(311, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_1)
-					.addGap(31)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textFieldUsername, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(rdbtnNewRadioButton)
-						.addComponent(lblNewLabel_3))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_4)
-						.addComponent(lblNewLabel_5))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textFieldIP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-							.addComponent(lblNewLabel_6)
-							.addGap(9)
-							.addComponent(textFieldPuerto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(17)
-							.addComponent(btnSolicitarChat)
-							.addGap(8)))
-					.addGap(18)
-					.addComponent(btnIniciarChat)
-					.addGap(17))
-		);
 		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
-		contentPane.setLayout(gl_contentPane);
+		JLabel lblNewLabel_5 = new JLabel("Puerto IP");
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
+		gl_panel_4.setHorizontalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addGap(63)
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnSolicitarChat)
+						.addComponent(textFieldIP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_4)
+						.addComponent(textFieldPuerto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_5))
+					.addContainerGap(72, Short.MAX_VALUE))
+		);
+		gl_panel_4.setVerticalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addGap(48)
+					.addComponent(lblNewLabel_4)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(textFieldIP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(30)
+					.addComponent(lblNewLabel_5)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldPuerto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+					.addComponent(btnSolicitarChat)
+					.addGap(32))
+		);
+		panel_4.setLayout(gl_panel_4);
+	;
 		this.setVisible(true);
 	}
-
+	
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnSolicitarChat.addActionListener(actionListener);
@@ -201,6 +204,6 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 
 		return resp;
 	}
+	
+	
 }
-
-
