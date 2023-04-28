@@ -5,18 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0e1c2e3-4c14-42d3-aa18-5f272a77448b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Direccion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Mensaje.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/MensajeSocket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Sesion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/ControladorPrincipal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/IVista.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/VentanaPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Direccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Informacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Mensaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Mensaje.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/MensajeSocket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Sesion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Sesion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Usuario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +23,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -55,9 +53,15 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/Lapiana/Downloads/DemoSocket",
     "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Santi\Facultad\Análisis y Diseño de Sistemas II\TPs\Chat_P2P\src\main\java\view" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -67,7 +71,19 @@
       <option name="presentableId" value="Default" />
       <updated>1682626763241</updated>
     </task>
+    <task id="LOCAL-00001" summary="Primer commit. Clases basicas del modelo. Falta terminar de implementar tema sockets.">
+      <created>1682633226826</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682633226826</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Primer commit. Clases basicas del modelo. Falta terminar de implementar tema sockets." />
+    <option name="LAST_COMMIT_MESSAGE" value="Primer commit. Clases basicas del modelo. Falta terminar de implementar tema sockets." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
