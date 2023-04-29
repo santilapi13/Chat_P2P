@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Observable;
+import controller.ControladorChat;
 
 import model.Usuario;
 
@@ -51,14 +52,17 @@ public class ControladorPrincipal implements ActionListener {
         }
 
         if (comando.equalsIgnoreCase("SOLICITAR CHAT")) {
-           String ip = vista.getDireccionIP();
-           String puerto = vista.getPuertoIP();
+            String ip = vista.getDireccionIP();
+            String puerto = vista.getPuertoIP();
+            int puertoInt = Integer.parseInt(puerto);
 
-          // Informacion info = new Informacion(ip, Integer.parseInt(puerto), "Otro");
-          //usuario.solicitarChat(info);
-
-           ControladorChat.getInstance();
-
+            Informacion informacionReceptor = new Informacion(ip, puertoInt, "");
+            try {
+                usuario.solicitarChat(informacionReceptor);
+                ControladorChat.getInstance();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
 
         }
 
