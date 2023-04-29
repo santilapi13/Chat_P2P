@@ -57,12 +57,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 	private JTextField textFieldIP;
 	private JTextField textFieldPuerto;
 
-	
-	public static void main(String[] args)
-	{
-		
-		VentanaPrincipal window = new VentanaPrincipal();
-	}
+
 	
 	
 	public VentanaPrincipal() {
@@ -131,7 +126,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 		lblNewLabel_4 = new JLabel("Direccion IP");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
-		btnSolicitarChat = new JButton("Solicitar Chat");
+		btnSolicitarChat = new JButton("SOLICITAR CHAT");
 		btnSolicitarChat.setEnabled(false);
 		
 		textFieldIP = new JTextField();
@@ -180,6 +175,8 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnSolicitarChat.addActionListener(actionListener);
+		this.rdbtnNewRadioButton.addActionListener(actionListener);
+
 		this.actionListener = actionListener;
 	}
 
@@ -204,6 +201,21 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 
 		return resp;
 	}
-	
-	
+
+	public void cerrarse() {
+		this.dispose();
+
+	}
+
+   	@Override
+	public String getDireccionIP()
+	{
+		return this.textFieldIP.getText();
+	}
+
+	public String getPuertoIP()
+	{
+		return this.textFieldPuerto.getText();
+	}
+
 }
