@@ -59,7 +59,7 @@ public class ControladorPrincipal implements ActionListener {
             Informacion informacionReceptor = new Informacion(ip, puertoInt, "");
             try {
                 usuario.solicitarChat(informacionReceptor);
-                ControladorChat.getInstance();
+                //ControladorChat.getInstance();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

@@ -1,5 +1,7 @@
 package model;
 
+import controller.ControladorChat;
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -69,6 +71,7 @@ public class Usuario extends Thread {
         this.entradaSocket = new InputStreamReader(socket.getInputStream());
         this.entrada = new BufferedReader(entradaSocket);
         this.salida = new PrintWriter(socket.getOutputStream(), true);
+        ControladorChat.getInstance();
     }
 
     private void activarModoEscucha() throws IOException {
@@ -76,11 +79,13 @@ public class Usuario extends Thread {
         isEscuchando = true;
         this.socket = socketServer.accept();
         this.iniciarESSockets();
+
     }
 
     public void solicitarChat(Informacion informacionReceptor) throws IOException {
         this.socket = new Socket(informacionReceptor.getIP(),informacionReceptor.getPuerto());
         iniciarESSockets();
+
     }
 
     public void enviarMensaje(String mensaje) throws IOException {
@@ -91,6 +96,8 @@ public class Usuario extends Thread {
     public String recibirMensaje() throws IOException {
         String mensaje = this.entrada.readLine();
         this.sesionActual.addMensaje(mensaje, this.informacion);    // TODO: Ver como obtener la informacion del emisor
+
+
         return mensaje;
     }
 

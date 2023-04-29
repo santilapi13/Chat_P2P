@@ -14,8 +14,8 @@ public class Prueba2 {
 
         Usuario.getInstance();
         int puerto=1123;
-        Usuario.getInstance().setPuerto(puerto);
-        System.out.println("Mi puerto es: " + Usuario.getInstance().getPuerto());
+        Usuario.getInstance().setPuerto(puerto);System.out.println("Mi puerto es: " + Usuario.getInstance().getPuerto());
+
         ControladorPrincipal principal = ControladorPrincipal.getInstance();
 
     }

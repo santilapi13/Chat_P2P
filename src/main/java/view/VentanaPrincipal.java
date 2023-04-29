@@ -222,4 +222,9 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 		return null;
 	}
 
+	@Override
+	public void agregarMensaje(String mensaje) {
+
+	}
+
 }

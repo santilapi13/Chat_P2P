@@ -6,6 +6,7 @@ import view.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 public class ControladorChat implements ActionListener  {
 
@@ -18,6 +19,14 @@ public class ControladorChat implements ActionListener  {
     public ControladorChat() {
         this.vista = new VentanaChat();
         this.vista.setActionListener(this);
+        iniciarHiloRecibirMensajes();
+        try {
+            usuario = Usuario.getInstance();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
     public static ControladorChat getInstance() {
@@ -33,9 +42,11 @@ public class ControladorChat implements ActionListener  {
         String comando = e.getActionCommand();
 
         if (comando.equalsIgnoreCase("ENVIAR")) {
-          String mensaje = vista.getText();
+          String mensaje = usuario.getPuerto() + vista.getText() ;
             try {
+                System.out.println(mensaje);
                 usuario.enviarMensaje(mensaje);  //Validar que mensaje no este vacio.
+                vista.agregarMensaje(mensaje);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -47,10 +58,11 @@ public class ControladorChat implements ActionListener  {
 
     private void iniciarHiloRecibirMensajes() {
         recibirMensajesThread = new Thread(() -> {
-            while (true) {
+            while (true) { //cambiar a sesiona activa.
                 try {
                     String mensaje = usuario.recibirMensaje();
-                    //vista.mostrarMensajeRecibido(mensaje);  MANDAR MENSAJE A VISTA
+                    System.out.println(mensaje);
+                    vista.agregarMensaje(mensaje);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
