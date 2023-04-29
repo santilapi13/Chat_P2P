@@ -1,27 +1,17 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
@@ -32,11 +22,14 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
     private ActionListener actionListener;
     private JTextField textField;
 
+    private JButton btnEnviar;
 
-     public static void main(String[] args) {
+
+
+    /* public static void main(String[] args) {
         VentanaChat frame = new VentanaChat();
         frame.setVisible(true);
-    }
+    }*/
 
     public VentanaChat () {
 
@@ -54,10 +47,11 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
         textField = new JTextField();
         panel.add(textField);
         textField.setColumns(10);
+        textField.addKeyListener(this);
 
-        JButton btnNewButton = new JButton("Enviar");
-        btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-        panel.add(btnNewButton, BorderLayout.EAST);
+        btnEnviar = new JButton("ENVIAR");
+        btnEnviar.setFont(new Font("Tahoma", Font.BOLD, 11));
+        panel.add(btnEnviar, BorderLayout.EAST);
 
         JPanel panel_1 = new JPanel();
         contentPane.add(panel_1, BorderLayout.NORTH);
@@ -81,6 +75,14 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
     }
 
     @Override
+    public void setActionListener(ActionListener actionListener) {
+         this.btnEnviar.addActionListener(actionListener);
+
+         this.actionListener = actionListener;
+    }
+
+
+    @Override
     public void keyTyped(KeyEvent e) {
 
     }
@@ -95,10 +97,7 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
 
     }
 
-    @Override
-    public void setActionListener(ActionListener actionListener) {
 
-    }
 
     @Override
     public void cerrarse() {
@@ -113,6 +112,11 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
     @Override
     public String getPuertoIP() {
         return null;
+    }
+
+    @Override
+    public String getText() {
+        return this.textField.getText();
     }
 
 }

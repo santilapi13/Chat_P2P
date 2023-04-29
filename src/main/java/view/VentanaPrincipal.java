@@ -218,4 +218,8 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 		return this.textFieldPuerto.getText();
 	}
 
+	public String getText() {
+		return null;
+	}
+
 }

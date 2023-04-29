@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c0e1c2e3-4c14-42d3-aa18-5f272a77448b" name="Changes" comment="Primer commit. Clases basicas del modelo. Falta terminar de implementar tema sockets.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pruebas/Prueba1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pruebas/Prueba1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ControladorPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ControladorChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ControladorChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/IVista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/IVista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/VentanaChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/VentanaChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/VentanaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/VentanaPrincipal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +55,7 @@
       <recent name="D:\Santi\Facultad\Análisis y Diseño de Sistemas II\TPs\Chat_P2P\src\main\java\view" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Prueba2">
+  <component name="RunManager" selected="Application.Prueba1">
     <configuration name="Prueba1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Pruebas.Prueba1" />
       <module name="Chat_P2P" />
@@ -108,8 +110,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Prueba2" />
         <item itemvalue="Application.Prueba1" />
+        <item itemvalue="Application.Prueba2" />
         <item itemvalue="Application.VentanaChat" />
         <item itemvalue="Application.VentanaPrincipal" />
       </list>
@@ -126,6 +128,7 @@
       <workItem from="1682784431394" duration="1898000" />
       <workItem from="1682787083528" duration="3103000" />
       <workItem from="1682791518895" duration="1796000" />
+      <workItem from="1682793390865" duration="1373000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit. Clases basicas del modelo. Falta terminar de implementar tema sockets.">
       <created>1682633226826</created>
