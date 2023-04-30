@@ -9,28 +9,17 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JRadioButton;
-import javax.swing.JList;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 //import com.jgoodies.forms.layout.FormLayout;
 //import com.jgoodies.forms.layout.ColumnSpec;
 //import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -49,7 +38,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JLabel lblNewLabel_3;
-	private JList list;
+	private JList<String> list;
 	private JButton btnIniciarChat;
 	private JButton btnSolicitarChat;
 	private JPanel panel_4;
@@ -58,6 +47,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 	private JTextField textFieldPuerto;
 
 
+	private DefaultListModel<String> modeloUsuario = new DefaultListModel<String>();
 	
 	
 	public VentanaPrincipal() {
@@ -116,6 +106,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 		
 		list = new JList();
 		panel_3.add(list, BorderLayout.CENTER);
+		list.addMouseListener(this);
 		
 		btnIniciarChat = new JButton("Iniciar Chat");
 		btnIniciarChat.setEnabled(false);
@@ -171,6 +162,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 		panel_4.setLayout(gl_panel_4);
 	;
 		this.setVisible(true);
+		this.list.setModel(this.modeloUsuario);
 	}
 	
 	@Override
@@ -178,6 +170,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 		this.btnSolicitarChat.addActionListener(actionListener);
 		this.rdbtnNewRadioButton.addActionListener(actionListener);
 		this.textFieldNombre.addActionListener(actionListener);
+		this.btnIniciarChat.addActionListener(actionListener);
 
 		this.actionListener = actionListener;
 	}
@@ -228,6 +221,19 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 	public void agregarMensaje(String mensaje) {
 	}
 
+	@Override
+	public void agregarUsuario(String usuario) {
+		this.modeloUsuario.addElement(usuario);
+		this.validate(); // Para que se actualice el JList
+	}
+
+	@Override
+	public void deseleccionar() {
+		this.list.clearSelection();
+		this.modeloUsuario.removeAllElements();
+		this.btnIniciarChat.setEnabled(false);
+	}
+
 	public String getUsername() {
 		return this.textFieldNombre.getText();
 	}
@@ -253,6 +259,11 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		if (!this.list.isSelectionEmpty()) {
+			this.btnIniciarChat.setEnabled(true);
+		} else {
+			this.btnIniciarChat.setEnabled(false);
+		}
 	}
 
 	@Override
@@ -268,4 +279,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 	public void setTextFieldNombre(String textFieldNombre) {
 		this.textFieldNombre.setText(textFieldNombre);
 	}
+
+
+
 }

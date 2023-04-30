@@ -112,6 +112,16 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
         this.textArea.append(mensaje + "\n");
     }
 
+    @Override
+    public void agregarUsuario(String usuario) {
+
+    }
+
+    @Override
+    public void deseleccionar() {
+
+    }
+
     public void vaciarTextField() {
     	this.textField.setText("");
     }

@@ -1,6 +1,7 @@
 package model;
 
 import controller.ControladorChat;
+import controller.ControladorPrincipal;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -19,6 +20,8 @@ public class Usuario implements Runnable {
     private boolean escuchando;
     private ArrayList<Sesion> sesionesAnteriores;
     private Sesion sesionActual;
+
+    private int solicitando=0;
 
      //PATRON SINGLETON
     private static Usuario instance;
@@ -81,7 +84,14 @@ public class Usuario implements Runnable {
         this.salida.println(this.informacion.getUsername());
         String usernameRemoto = this.entrada.readLine();
         this.sesionActual = new Sesion(this.informacion, new Informacion(this.socket.getInetAddress().toString(), this.socket.getPort(), usernameRemoto));
-        ControladorChat.getInstance();
+
+        if (this.solicitando==1) {
+            ControladorChat.getInstance();
+        }
+        else{
+            ControladorPrincipal.getInstance().agregarUsuario(usernameRemoto);
+        }
+
     }
 
     private void activarModoEscucha() throws IOException {
@@ -102,6 +112,7 @@ public class Usuario implements Runnable {
 
     public void solicitarChat(Informacion informacionReceptor) throws IOException {
         this.socket = new Socket(informacionReceptor.getIP(),informacionReceptor.getPuerto());
+        this.solicitando=1;
         iniciarESSockets();
     }
 
@@ -120,6 +131,7 @@ public class Usuario implements Runnable {
         this.sesionesAnteriores.add(this.sesionActual);
         sesionActual = null;
         this.socket.close();
+        this.socket = null;
         if (escuchando) {
             this.socketServer.close();
             escuchando = false;

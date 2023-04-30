@@ -27,6 +27,7 @@ public class ControladorChat implements ActionListener, Runnable  {
             public void windowClosing(WindowEvent e) {
                 try {
                     recibirMensajesThread.interrupt();
+                    System.out.println("SE CERRO LA VENTANA");
                     Usuario.getInstance().desconectar();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
@@ -64,7 +65,7 @@ public class ControladorChat implements ActionListener, Runnable  {
     @Override
     public void run() {
         try {
-            while (!Usuario.getInstance().getSocket().isInputShutdown() && !Usuario.getInstance().getSocket().isOutputShutdown()) { //cambiar a sesion activa.
+            while (!Usuario.getInstance().getSocket().isInputShutdown() && !Usuario.getInstance().getSocket().isOutputShutdown() && Usuario.getInstance().getSocket().getInputStream().read() != -1) {
                 try {
                     String mensaje = Usuario.getInstance().recibirMensaje();
                     if (mensaje != null && !mensaje.isEmpty())

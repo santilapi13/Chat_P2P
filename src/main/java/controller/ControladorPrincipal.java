@@ -58,12 +58,20 @@ public class ControladorPrincipal implements ActionListener {
                 Informacion informacionReceptor = new Informacion(ip, puertoInt, "");
                 Usuario.getInstance().solicitarChat(informacionReceptor);
             }
+            if (comando.equalsIgnoreCase("INICIAR CHAT")) {
+                ControladorChat.getInstance();
+                this.vista.deseleccionar();
+            }
         } catch (UnknownHostException ex1) {
             JOptionPane.showMessageDialog(null, "ERROR: Compruebe IP ingresada.");
         } catch (IOException ex2) {
             JOptionPane.showMessageDialog(null, "ERROR: Compruebe Puerto e IP ingresados.");
         }
 
+    }
+
+    public void agregarUsuario( String usuario ) {
+        vista.agregarUsuario( usuario );
     }
 
 }

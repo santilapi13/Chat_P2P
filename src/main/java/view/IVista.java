@@ -15,4 +15,8 @@ public interface IVista {
     String getText();
     void agregarMensaje( String mensaje );
 
+    void agregarUsuario( String usuario );
+
+    void deseleccionar();
+
 }
