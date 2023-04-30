@@ -116,7 +116,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 		panel_4 = new JPanel();
 		panel_2.add(panel_4);
 		
-		lblNewLabel_4 = new JLabel("Direccion IP");
+		lblNewLabel_4 = new JLabel("Direccion IPv6");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		btnSolicitarChat = new JButton("SOLICITAR CHAT");

@@ -32,6 +32,7 @@ public class ControladorChat implements ActionListener, Runnable  {
                 try {
                     recibirMensajesThread.interrupt();
                     Usuario.getInstance().desconectar();
+                    java.awt.Toolkit.getDefaultToolkit().beep();
                     ControladorPrincipal.getInstance().getVista().abrirVentana();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
@@ -75,13 +76,16 @@ public class ControladorChat implements ActionListener, Runnable  {
             while (!Usuario.getInstance().getSocket().isInputShutdown() && !Usuario.getInstance().getSocket().isOutputShutdown() && sigueLeyendo != -1) {
                 try {
                     String mensaje = (char) sigueLeyendo + Usuario.getInstance().recibirMensaje();
-                    if (mensaje != null && !mensaje.isEmpty())
+                    if (mensaje != null && !mensaje.isEmpty()) {
+                        java.awt.Toolkit.getDefaultToolkit().beep();
                         vista.agregarMensaje(Usuario.getInstance().getSesionActual().getRemoto().getUsername() + ": " + mensaje);
+                    }
                 } catch (IOException e) {}
                 sigueLeyendo = Usuario.getInstance().getSocket().getInputStream().read();
             }
             Usuario.getInstance().desconectar();
             ControladorPrincipal.getInstance().getVista().abrirVentana();
+            java.awt.Toolkit.getDefaultToolkit().beep();
             ((VentanaChat) vista).dispose();
         } catch (IOException e) {
             System.out.println("TERMINO EL RUN DEL HILO CON EXCEPCION");
