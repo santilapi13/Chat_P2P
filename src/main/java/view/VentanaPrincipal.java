@@ -35,7 +35,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 @SuppressWarnings("serial")
-public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
+public class VentanaPrincipal extends JFrame implements IVista, KeyListener, MouseListener {
 
 	private JPanel contentPane;
 	private ActionListener actionListener;
@@ -226,11 +226,42 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 
 	@Override
 	public void agregarMensaje(String mensaje) {
-
 	}
 
 	public String getUsername() {
 		return this.textFieldNombre.getText();
 	}
 
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == this.rdbtnNewRadioButton) {
+			if (this.rdbtnNewRadioButton.isSelected()) {
+				this.textFieldNombre.setEnabled(false);
+				this.textFieldIP.setEnabled(false);
+				this.textFieldPuerto.setEnabled(false);
+			} else {
+				this.textFieldNombre.setEnabled(true);
+				this.textFieldIP.setEnabled(true);
+				this.textFieldPuerto.setEnabled(true);
+			}
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+	}
 }

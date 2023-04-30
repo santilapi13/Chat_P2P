@@ -41,8 +41,13 @@ public class ControladorPrincipal implements ActionListener {
         String comando = e.getActionCommand();
         try {
             if (comando.equalsIgnoreCase("")) {
-                Usuario.getInstance().setUsername(((VentanaPrincipal) vista).getUsername());
-                Usuario.getInstance().start();
+                if (!Usuario.getInstance().isEscuchando()) {
+                    Usuario.getInstance().setUsername(((VentanaPrincipal) vista).getUsername());
+                    Thread hilo = new Thread(Usuario.getInstance());
+                    hilo.start();
+                } else {
+                    Usuario.getInstance().desactivarModoEscucha();
+                }
             }
             if (comando.equalsIgnoreCase("SOLICITAR CHAT")) {
                 String ip = vista.getDireccionIP();

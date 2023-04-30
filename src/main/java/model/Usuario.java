@@ -9,14 +9,14 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-public class Usuario extends Thread {
+public class Usuario implements Runnable {
     private Informacion informacion;
     private Socket socket;
     private ServerSocket socketServer;
     private InputStreamReader entradaSocket;
     private PrintWriter salida;
     private BufferedReader entrada;
-    private boolean isEscuchando;
+    private boolean escuchando;
     private ArrayList<Sesion> sesionesAnteriores;
     private Sesion sesionActual;
 
@@ -24,7 +24,7 @@ public class Usuario extends Thread {
     private static Usuario instance;
     private Usuario() throws UnknownHostException {
         this.informacion = new Informacion(InetAddress.getLocalHost().getHostAddress(), 1234, "");
-        this.isEscuchando = false;
+        this.escuchando = false;
         this.sesionesAnteriores = new ArrayList<>();
         this.sesionActual = null;
     }
@@ -59,6 +59,9 @@ public class Usuario extends Thread {
     public Sesion getSesionActual() {
         return sesionActual;
     }
+    public boolean isEscuchando() {
+        return escuchando;
+    }
 
     /**
      * Se pone en modo escucha esperando una solicitud de chat.
@@ -68,7 +71,6 @@ public class Usuario extends Thread {
         try {
             this.activarModoEscucha();
         } catch (IOException e) {
-            System.out.println("Error al activar el modo escucha.");
         }
     }
 
@@ -82,10 +84,19 @@ public class Usuario extends Thread {
     }
 
     private void activarModoEscucha() throws IOException {
+        System.out.println("Modo escucha activado.");
         this.socketServer = new ServerSocket(this.getPuerto());
-        isEscuchando = true;
+        escuchando = true;
         this.socket = socketServer.accept();
         this.iniciarESSockets();
+    }
+
+    public void desactivarModoEscucha() throws IOException {
+        this.socketServer.close();
+        this.socketServer = null;
+        this.socket = null;
+        escuchando = false;
+        System.out.println("Modo escucha desactivado.");
     }
 
     public void solicitarChat(Informacion informacionReceptor) throws IOException {
@@ -108,9 +119,9 @@ public class Usuario extends Thread {
         this.sesionesAnteriores.add(this.sesionActual);
         sesionActual = null;
         this.socket.close();
-        if (isEscuchando) {
+        if (escuchando) {
             this.socketServer.close();
-            isEscuchando = false;
+            escuchando = false;
         }
     }
 
