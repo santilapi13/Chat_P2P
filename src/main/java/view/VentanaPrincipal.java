@@ -61,7 +61,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 	
 	
 	public VentanaPrincipal() {
-
+		setTitle("App de Mensajeria Instantanea");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(300, 300, 474, 414);
 		this.contentPane = new JPanel();
@@ -263,5 +263,9 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 	@Override
 	public void mouseExited(MouseEvent e) {
 
+	}
+
+	public void setTextFieldNombre(String textFieldNombre) {
+		this.textFieldNombre.setText(textFieldNombre);
 	}
 }

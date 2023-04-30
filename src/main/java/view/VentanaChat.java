@@ -3,20 +3,12 @@ package view;
 import model.Usuario;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
+import java.io.IOException;
 import java.net.UnknownHostException;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
 public class VentanaChat extends JFrame implements IVista, KeyListener {
@@ -30,6 +22,8 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
     private JTextArea textArea;
 
     public VentanaChat () throws UnknownHostException {
+
+        setTitle("Chat con " + Usuario.getInstance().getSesionActual().getRemoto().getUsername());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 419, 344);
@@ -54,7 +48,7 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
         JPanel panel_1 = new JPanel();
         contentPane.add(panel_1, BorderLayout.NORTH);
 
-        JLabel lblNewLabel = new JLabel("Usuario " + " " + Usuario.getInstance().getSocket().getInetAddress().toString());
+        JLabel lblNewLabel = new JLabel(Usuario.getInstance().getSesionActual().getRemoto().getUsername() + " " + Usuario.getInstance().getSocket().getInetAddress().toString());
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 

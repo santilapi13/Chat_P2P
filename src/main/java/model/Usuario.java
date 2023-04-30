@@ -75,11 +75,12 @@ public class Usuario implements Runnable {
     }
 
     private void iniciarESSockets() throws IOException {
-        // TODO: Ver como obtener el username del remoto
-        this.sesionActual = new Sesion(this.informacion, new Informacion(this.socket.getInetAddress().toString(), this.socket.getPort(), ""));
         this.entradaSocket = new InputStreamReader(socket.getInputStream());
         this.entrada = new BufferedReader(entradaSocket);
         this.salida = new PrintWriter(socket.getOutputStream(), true);
+        this.salida.println(this.informacion.getUsername());
+        String usernameRemoto = this.entrada.readLine();
+        this.sesionActual = new Sesion(this.informacion, new Informacion(this.socket.getInetAddress().toString(), this.socket.getPort(), usernameRemoto));
         ControladorChat.getInstance();
     }
 

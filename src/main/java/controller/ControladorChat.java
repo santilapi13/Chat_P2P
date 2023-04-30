@@ -3,12 +3,15 @@ package controller;
 import model.Usuario;
 import view.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-public class ControladorChat implements ActionListener  {
+public class ControladorChat implements ActionListener, Runnable  {
 
     private IVista vista;
     private static ControladorChat instance;
@@ -18,6 +21,18 @@ public class ControladorChat implements ActionListener  {
     private ControladorChat() throws UnknownHostException {
         this.vista = new VentanaChat();
         this.vista.setActionListener(this);
+        ((VentanaChat) this.vista).setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        ((VentanaChat) this.vista).addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    recibirMensajesThread.interrupt();
+                    Usuario.getInstance().desconectar();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
         iniciarHiloRecibirMensajes();
     }
 
@@ -39,24 +54,34 @@ public class ControladorChat implements ActionListener  {
             try {
                 if (mensaje != null && !mensaje.isEmpty())
                     Usuario.getInstance().enviarMensaje(mensaje);
-                vista.agregarMensaje(Usuario.getInstance().getUsername() + "(YO): " + mensaje);
+                vista.agregarMensaje(Usuario.getInstance().getUsername() + "(Yo): " + mensaje);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         }
     }
 
-    private void iniciarHiloRecibirMensajes() {
-        recibirMensajesThread = new Thread(() -> {
-            while (true) { //cambiar a sesion activa.
+    @Override
+    public void run() {
+        try {
+            while (!Usuario.getInstance().getSocket().isInputShutdown() && !Usuario.getInstance().getSocket().isOutputShutdown()) { //cambiar a sesion activa.
                 try {
                     String mensaje = Usuario.getInstance().recibirMensaje();
-                    vista.agregarMensaje(Usuario.getInstance().getSesionActual().getRemoto().getUsername() + ": " + mensaje);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                    if (mensaje != null && !mensaje.isEmpty())
+                        vista.agregarMensaje(Usuario.getInstance().getSesionActual().getRemoto().getUsername() + ": " + mensaje);
+                } catch (IOException e) {}
             }
-        });
+            System.out.println("SE SALIO DEL WHILE");
+            Usuario.getInstance().desconectar();
+            ((VentanaChat) vista).dispose();
+        } catch (IOException e) {
+            System.out.println("TERMINO EL RUN DEL HILO CON EXCEPCION");
+        }
+    }
+
+    private void iniciarHiloRecibirMensajes() {
+        recibirMensajesThread = new Thread(this);
         recibirMensajesThread.start();
     }
+
 }

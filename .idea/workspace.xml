@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0e1c2e3-4c14-42d3-aa18-5f272a77448b" name="Changes" comment="">
+    <list default="true" id="c0e1c2e3-4c14-42d3-aa18-5f272a77448b" name="Changes" comment="Usuario Runnable en vez de Thread.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ControladorChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ControladorChat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ControladorPrincipal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/VentanaChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/VentanaChat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/VentanaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/VentanaPrincipal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,13 +82,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682867844754</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Usuario Runnable en vez de Thread.">
+      <created>1682871297359</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682871297359</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Primer commit. Clases basicas del modelo. Falta terminar de implementar tema sockets." />
     <MESSAGE value="Sesion y Mensajes se cargan correctamente (falta username del remoto)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Sesion y Mensajes se cargan correctamente (falta username del remoto)." />
+    <MESSAGE value="Usuario Runnable en vez de Thread." />
+    <option name="LAST_COMMIT_MESSAGE" value="Usuario Runnable en vez de Thread." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

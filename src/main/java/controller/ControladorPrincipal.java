@@ -20,12 +20,13 @@ public class ControladorPrincipal implements ActionListener {
     private IVista vista;
     private static ControladorPrincipal instance;
     
-    private ControladorPrincipal() {
+    private ControladorPrincipal() throws UnknownHostException {
         this.vista = new VentanaPrincipal();
         this.vista.setActionListener(this);
+        ((VentanaPrincipal) this.vista).setTextFieldNombre(Usuario.getInstance().getUsername());
     }
     
-    public static ControladorPrincipal getInstance() {
+    public static ControladorPrincipal getInstance() throws UnknownHostException {
         if (instance == null) {
             instance = new ControladorPrincipal();
         }
