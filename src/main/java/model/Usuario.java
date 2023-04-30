@@ -25,7 +25,7 @@ public class Usuario implements Runnable, GestorSesiones, EnvioMensajes, GestorC
     private ArrayList<Sesion> sesionesAnteriores;
     private Sesion sesionActual;
 
-    private int solicitando = 0;
+    private boolean solicitando = false;
 
      //PATRON SINGLETON
     private static Usuario instance;
@@ -107,7 +107,7 @@ public class Usuario implements Runnable, GestorSesiones, EnvioMensajes, GestorC
         String usernameRemoto = this.entrada.readLine();
         this.sesionActual = new Sesion(this.informacion, new Informacion(this.socket.getInetAddress().toString(), this.socket.getPort(), usernameRemoto));
 
-        if (this.solicitando == 1) {
+        if (this.solicitando) {
             ControladorChat.getInstance().nuevaVentana();
         }
         else{
@@ -153,7 +153,7 @@ public class Usuario implements Runnable, GestorSesiones, EnvioMensajes, GestorC
      */
     public void solicitarChat(Informacion informacionReceptor) throws IOException {
         this.socket = new Socket(informacionReceptor.getIP(),informacionReceptor.getPuerto());
-        this.solicitando = 1;
+        this.solicitando = true;
         iniciarESSockets();
     }
 
@@ -190,7 +190,7 @@ public class Usuario implements Runnable, GestorSesiones, EnvioMensajes, GestorC
         this.salida = null;
         this.entrada = null;
         this.entradaSocket = null;
-        this.solicitando = 0;
+        this.solicitando = false;
     }
 
 }
