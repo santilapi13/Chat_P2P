@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0e1c2e3-4c14-42d3-aa18-5f272a77448b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/EnvioMensajes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/GestorConexion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/GestorMensajes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/GestorSesiones.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ControladorPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Sesion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Sesion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Usuario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682889140869</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Agregado de interfaces segun diagrama de componentes.">
+      <created>1682890443708</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682890443708</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -114,7 +115,8 @@
     <MESSAGE value="Usuario Runnable en vez de Thread." />
     <MESSAGE value="Funcionalmente anda todo. TODO: Probar entre PCs distintas en redes distintas." />
     <MESSAGE value="Anda en redes distintas. Agregado de sonido de notificacion." />
-    <option name="LAST_COMMIT_MESSAGE" value="Anda en redes distintas. Agregado de sonido de notificacion." />
+    <MESSAGE value="Agregado de interfaces segun diagrama de componentes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Agregado de interfaces segun diagrama de componentes." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
