@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-public class Usuario implements Runnable {
+public class Usuario implements Runnable, GestorSesiones, EnvioMensajes, GestorConexion {
     private Informacion informacion;
     private Socket socket;
     private ServerSocket socketServer;
@@ -62,6 +62,15 @@ public class Usuario implements Runnable {
     public Sesion getSesionActual() {
         return sesionActual;
     }
+    @Override
+    public void setSesionActual(Sesion sesionActual) {
+        this.sesionActual = sesionActual;
+    }
+    @Override
+    public void addNuevaSesion(Sesion sesion) {
+        this.sesionesAnteriores.add(sesion);
+    }
+
     public boolean isEscuchando() {
         return escuchando;
     }
@@ -91,7 +100,6 @@ public class Usuario implements Runnable {
         else{
             ControladorPrincipal.getInstance().agregarUsuario(usernameRemoto);
         }
-
     }
 
     private void activarModoEscucha() throws IOException {
@@ -131,7 +139,7 @@ public class Usuario implements Runnable {
     }
 
     public void desconectar() throws IOException {
-        this.sesionesAnteriores.add(this.sesionActual);
+        this.addNuevaSesion(this.sesionActual);
         sesionActual = null;
         this.socket.close();
         this.socket = null;

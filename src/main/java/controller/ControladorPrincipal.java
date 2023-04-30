@@ -63,8 +63,10 @@ public class ControladorPrincipal implements ActionListener {
                 this.vista.deseleccionar();
             }
         } catch (UnknownHostException ex1) {
+            java.awt.Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, "ERROR: Compruebe IP ingresada.");
         } catch (IOException ex2) {
+            java.awt.Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, "ERROR: Compruebe Puerto e IP ingresados.");
         }
 
