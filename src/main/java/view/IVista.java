@@ -4,6 +4,10 @@ import java.awt.event.ActionListener;
 
 public interface IVista {
 
+    void minimizarVentana();
+
+    void abrirVentana();
+
     void setActionListener(ActionListener actionListener);
 
     void cerrarse();

@@ -89,6 +89,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 		panel_1.add(lblNewLabel_2);
 		
 		rdbtnNewRadioButton = new JRadioButton("");
+		rdbtnNewRadioButton.addMouseListener(this);
 		panel_1.add(rdbtnNewRadioButton);
 		
 		panel_2 = new JPanel();
@@ -232,6 +233,10 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 		this.list.clearSelection();
 		this.modeloUsuario.removeAllElements();
 		this.btnIniciarChat.setEnabled(false);
+		this.rdbtnNewRadioButton.setSelected(false);
+		this.textFieldNombre.setEnabled(true);
+		this.textFieldIP.setEnabled(true);
+		this.textFieldPuerto.setEnabled(true);
 	}
 
 	public String getUsername() {
@@ -240,17 +245,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == this.rdbtnNewRadioButton) {
-			if (this.rdbtnNewRadioButton.isSelected()) {
-				this.textFieldNombre.setEnabled(false);
-				this.textFieldIP.setEnabled(false);
-				this.textFieldPuerto.setEnabled(false);
-			} else {
-				this.textFieldNombre.setEnabled(true);
-				this.textFieldIP.setEnabled(true);
-				this.textFieldPuerto.setEnabled(true);
-			}
-		}
+
 	}
 
 	@Override
@@ -263,6 +258,19 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 			this.btnIniciarChat.setEnabled(true);
 		} else {
 			this.btnIniciarChat.setEnabled(false);
+		}
+		if (e.getSource() == this.rdbtnNewRadioButton) {
+			if (this.rdbtnNewRadioButton.isSelected()) {
+				this.textFieldIP.setText("");
+				this.textFieldPuerto.setText("");
+				this.textFieldNombre.setEnabled(false);
+				this.textFieldIP.setEnabled(false);
+				this.textFieldPuerto.setEnabled(false);
+			} else {
+				this.textFieldNombre.setEnabled(true);
+				this.textFieldIP.setEnabled(true);
+				this.textFieldPuerto.setEnabled(true);
+			}
 		}
 	}
 
@@ -280,6 +288,12 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener, Mou
 		this.textFieldNombre.setText(textFieldNombre);
 	}
 
+	public void minimizarVentana() {
+		this.setVisible(false);
+	}
 
+	public void abrirVentana() {
+		this.setVisible(true);
+	}
 
 }

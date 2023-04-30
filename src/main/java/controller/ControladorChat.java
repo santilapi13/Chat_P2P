@@ -18,7 +18,11 @@ public class ControladorChat implements ActionListener, Runnable  {
 
     private Thread recibirMensajesThread;
 
-    private ControladorChat() throws UnknownHostException {
+    private ControladorChat() {
+    }
+
+    public void nuevaVentana() throws UnknownHostException {
+        ControladorPrincipal.getInstance().getVista().minimizarVentana();
         this.vista = new VentanaChat();
         this.vista.setActionListener(this);
         ((VentanaChat) this.vista).setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -27,8 +31,8 @@ public class ControladorChat implements ActionListener, Runnable  {
             public void windowClosing(WindowEvent e) {
                 try {
                     recibirMensajesThread.interrupt();
-                    System.out.println("SE CERRO LA VENTANA");
                     Usuario.getInstance().desconectar();
+                    ControladorPrincipal.getInstance().getVista().abrirVentana();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -53,9 +57,10 @@ public class ControladorChat implements ActionListener, Runnable  {
             String mensaje = vista.getText();
             ((VentanaChat) vista).vaciarTextField();
             try {
-                if (mensaje != null && !mensaje.isEmpty())
+                if (mensaje != null && !mensaje.isEmpty()) {
                     Usuario.getInstance().enviarMensaje(mensaje);
-                vista.agregarMensaje(Usuario.getInstance().getUsername() + "(Yo): " + mensaje);
+                    vista.agregarMensaje(Usuario.getInstance().getUsername() + " (Yo): " + mensaje);
+                }
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -65,15 +70,18 @@ public class ControladorChat implements ActionListener, Runnable  {
     @Override
     public void run() {
         try {
-            while (!Usuario.getInstance().getSocket().isInputShutdown() && !Usuario.getInstance().getSocket().isOutputShutdown() && Usuario.getInstance().getSocket().getInputStream().read() != -1) {
+            // Lee el primer caracter para checkear que siga establecida la conexion
+            int sigueLeyendo = Usuario.getInstance().getSocket().getInputStream().read();
+            while (!Usuario.getInstance().getSocket().isInputShutdown() && !Usuario.getInstance().getSocket().isOutputShutdown() && sigueLeyendo != -1) {
                 try {
-                    String mensaje = Usuario.getInstance().recibirMensaje();
+                    String mensaje = (char) sigueLeyendo + Usuario.getInstance().recibirMensaje();
                     if (mensaje != null && !mensaje.isEmpty())
                         vista.agregarMensaje(Usuario.getInstance().getSesionActual().getRemoto().getUsername() + ": " + mensaje);
                 } catch (IOException e) {}
+                sigueLeyendo = Usuario.getInstance().getSocket().getInputStream().read();
             }
-            System.out.println("SE SALIO DEL WHILE");
             Usuario.getInstance().desconectar();
+            ControladorPrincipal.getInstance().getVista().abrirVentana();
             ((VentanaChat) vista).dispose();
         } catch (IOException e) {
             System.out.println("TERMINO EL RUN DEL HILO CON EXCEPCION");

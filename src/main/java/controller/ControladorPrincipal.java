@@ -59,7 +59,7 @@ public class ControladorPrincipal implements ActionListener {
                 Usuario.getInstance().solicitarChat(informacionReceptor);
             }
             if (comando.equalsIgnoreCase("INICIAR CHAT")) {
-                ControladorChat.getInstance();
+                ControladorChat.getInstance().nuevaVentana();
                 this.vista.deseleccionar();
             }
         } catch (UnknownHostException ex1) {

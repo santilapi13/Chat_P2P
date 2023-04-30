@@ -21,7 +21,7 @@ public class Usuario implements Runnable {
     private ArrayList<Sesion> sesionesAnteriores;
     private Sesion sesionActual;
 
-    private int solicitando=0;
+    private int solicitando = 0;
 
      //PATRON SINGLETON
     private static Usuario instance;
@@ -85,8 +85,8 @@ public class Usuario implements Runnable {
         String usernameRemoto = this.entrada.readLine();
         this.sesionActual = new Sesion(this.informacion, new Informacion(this.socket.getInetAddress().toString(), this.socket.getPort(), usernameRemoto));
 
-        if (this.solicitando==1) {
-            ControladorChat.getInstance();
+        if (this.solicitando == 1) {
+            ControladorChat.getInstance().nuevaVentana();
         }
         else{
             ControladorPrincipal.getInstance().agregarUsuario(usernameRemoto);
@@ -99,6 +99,9 @@ public class Usuario implements Runnable {
         this.socketServer = new ServerSocket(this.getPuerto());
         escuchando = true;
         this.socket = socketServer.accept();
+        this.socketServer.close();
+        escuchando = false;
+        this.socketServer = null;
         this.iniciarESSockets();
     }
 
@@ -112,7 +115,7 @@ public class Usuario implements Runnable {
 
     public void solicitarChat(Informacion informacionReceptor) throws IOException {
         this.socket = new Socket(informacionReceptor.getIP(),informacionReceptor.getPuerto());
-        this.solicitando=1;
+        this.solicitando = 1;
         iniciarESSockets();
     }
 
@@ -132,10 +135,10 @@ public class Usuario implements Runnable {
         sesionActual = null;
         this.socket.close();
         this.socket = null;
-        if (escuchando) {
-            this.socketServer.close();
-            escuchando = false;
-        }
+        this.salida = null;
+        this.entrada = null;
+        this.entradaSocket = null;
+        this.solicitando = 0;
     }
 
 }

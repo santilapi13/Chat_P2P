@@ -60,6 +60,8 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
 
         textArea = new JTextArea();
         scrollPane.setViewportView(textArea);
+        textArea.setEditable(false);
+
         this.setVisible(true);
     }
 
@@ -109,7 +111,9 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
 
     @Override
     public void agregarMensaje(String mensaje) {
+        this.textArea.setEditable(true);
         this.textArea.append(mensaje + "\n");
+        this.textArea.setEditable(false);
     }
 
     @Override
@@ -126,6 +130,9 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
     	this.textField.setText("");
     }
 
+    public void minimizarVentana() {}
+
+    public void abrirVentana() {}
 }
 
 
