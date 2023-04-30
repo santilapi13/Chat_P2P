@@ -12,24 +12,16 @@ public class ControladorChat implements ActionListener  {
 
     private IVista vista;
     private static ControladorChat instance;
-    Usuario usuario;
 
     private Thread recibirMensajesThread;
 
-    public ControladorChat() {
+    private ControladorChat() throws UnknownHostException {
         this.vista = new VentanaChat();
         this.vista.setActionListener(this);
         iniciarHiloRecibirMensajes();
-        try {
-            usuario = Usuario.getInstance();
-        } catch (UnknownHostException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
     }
 
-    public static ControladorChat getInstance() {
+    public static ControladorChat getInstance() throws UnknownHostException {
         if (instance == null) {
             instance = new ControladorChat();
         }
@@ -42,27 +34,24 @@ public class ControladorChat implements ActionListener  {
         String comando = e.getActionCommand();
 
         if (comando.equalsIgnoreCase("ENVIAR")) {
-          String mensaje = usuario.getPuerto() + vista.getText() ;
+            String mensaje = vista.getText();
+            ((VentanaChat) vista).vaciarTextField();
             try {
-                System.out.println(mensaje);
-                usuario.enviarMensaje(mensaje);  //Validar que mensaje no este vacio.
-                vista.agregarMensaje(mensaje);
+                if (mensaje != null && !mensaje.isEmpty())
+                    Usuario.getInstance().enviarMensaje(mensaje);
+                vista.agregarMensaje(Usuario.getInstance().getUsername() + "(YO): " + mensaje);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         }
-
-
-
     }
 
     private void iniciarHiloRecibirMensajes() {
         recibirMensajesThread = new Thread(() -> {
-            while (true) { //cambiar a sesiona activa.
+            while (true) { //cambiar a sesion activa.
                 try {
-                    String mensaje = usuario.recibirMensaje();
-                    System.out.println(mensaje);
-                    vista.agregarMensaje(mensaje);
+                    String mensaje = Usuario.getInstance().recibirMensaje();
+                    vista.agregarMensaje(Usuario.getInstance().getSesionActual().getRemoto().getUsername() + ": " + mensaje);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

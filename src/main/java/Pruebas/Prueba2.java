@@ -12,11 +12,11 @@ public class Prueba2 {
         InetAddress miDireccionIP = InetAddress.getLocalHost();
         System.out.println("Mi dirección IP es: " + miDireccionIP.getHostAddress());
 
-        Usuario.getInstance();
         int puerto=1123;
-        Usuario.getInstance().setPuerto(puerto);System.out.println("Mi puerto es: " + Usuario.getInstance().getPuerto());
+        Usuario.getInstance().setPuerto(puerto);
+        System.out.println("Mi puerto es: " + Usuario.getInstance().getPuerto());
 
-        ControladorPrincipal principal = ControladorPrincipal.getInstance();
+        ControladorPrincipal.getInstance();
 
     }
 

@@ -91,6 +91,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 		textFieldNombre = new JTextField();
 		panel_1.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
+		textFieldNombre.addKeyListener(this);
 		
 		lblNewLabel_2 = new JLabel("Escucha Habilitada");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -176,6 +177,7 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 	public void setActionListener(ActionListener actionListener) {
 		this.btnSolicitarChat.addActionListener(actionListener);
 		this.rdbtnNewRadioButton.addActionListener(actionListener);
+		this.textFieldNombre.addActionListener(actionListener);
 
 		this.actionListener = actionListener;
 	}
@@ -225,6 +227,10 @@ public class VentanaPrincipal extends JFrame implements IVista, KeyListener {
 	@Override
 	public void agregarMensaje(String mensaje) {
 
+	}
+
+	public String getUsername() {
+		return this.textFieldNombre.getText();
 	}
 
 }

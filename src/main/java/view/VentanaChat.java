@@ -1,9 +1,12 @@
 package view;
 
+import model.Usuario;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.UnknownHostException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,13 +29,7 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
 
     private JTextArea textArea;
 
-
-    /* public static void main(String[] args) {
-        VentanaChat frame = new VentanaChat();
-        frame.setVisible(true);
-    }*/
-
-    public VentanaChat () {
+    public VentanaChat () throws UnknownHostException {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 419, 344);
@@ -57,15 +54,12 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
         JPanel panel_1 = new JPanel();
         contentPane.add(panel_1, BorderLayout.NORTH);
 
-        JLabel lblNewLabel = new JLabel("Usuario / Ip");
+        JLabel lblNewLabel = new JLabel("Usuario " + " " + Usuario.getInstance().getSocket().getInetAddress().toString());
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 
-        JLabel lblNewLabel_1 = new JLabel("<dynamic>");
-        lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
         panel_1.setLayout(new GridLayout(2, 1, 0, 0));
         panel_1.add(lblNewLabel);
-        panel_1.add(lblNewLabel_1);
 
         JScrollPane scrollPane = new JScrollPane();
         contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -78,7 +72,6 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
     @Override
     public void setActionListener(ActionListener actionListener) {
          this.btnEnviar.addActionListener(actionListener);
-
          this.actionListener = actionListener;
     }
 
@@ -123,6 +116,10 @@ public class VentanaChat extends JFrame implements IVista, KeyListener {
     @Override
     public void agregarMensaje(String mensaje) {
         this.textArea.append(mensaje + "\n");
+    }
+
+    public void vaciarTextField() {
+    	this.textField.setText("");
     }
 
 }

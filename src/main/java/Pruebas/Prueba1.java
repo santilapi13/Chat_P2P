@@ -10,10 +10,9 @@ public class Prueba1 {
 	
 	
 	public static void main(String[] args) throws UnknownHostException {
-		
-		Usuario.getInstance();
+
 		System.out.println("Mi puerto es: " + Usuario.getInstance().getPuerto());
-		ControladorPrincipal principal = ControladorPrincipal.getInstance();
+		ControladorPrincipal.getInstance();
 
 	}
 

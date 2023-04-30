@@ -53,6 +53,12 @@ public class Usuario extends Thread {
     public void setUsername(String username) {
         this.informacion.setUsername(username);
     }
+    public Socket getSocket() {
+        return this.socket;
+    }
+    public Sesion getSesionActual() {
+        return sesionActual;
+    }
 
     /**
      * Se pone en modo escucha esperando una solicitud de chat.
@@ -62,12 +68,13 @@ public class Usuario extends Thread {
         try {
             this.activarModoEscucha();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error al activar el modo escucha.");
         }
     }
 
     private void iniciarESSockets() throws IOException {
-        this.sesionActual = new Sesion();
+        // TODO: Ver como obtener el username del remoto
+        this.sesionActual = new Sesion(this.informacion, new Informacion(this.socket.getInetAddress().toString(), this.socket.getPort(), ""));
         this.entradaSocket = new InputStreamReader(socket.getInputStream());
         this.entrada = new BufferedReader(entradaSocket);
         this.salida = new PrintWriter(socket.getOutputStream(), true);
@@ -79,25 +86,21 @@ public class Usuario extends Thread {
         isEscuchando = true;
         this.socket = socketServer.accept();
         this.iniciarESSockets();
-
     }
 
     public void solicitarChat(Informacion informacionReceptor) throws IOException {
         this.socket = new Socket(informacionReceptor.getIP(),informacionReceptor.getPuerto());
         iniciarESSockets();
-
     }
 
     public void enviarMensaje(String mensaje) throws IOException {
-        this.sesionActual.addMensaje(mensaje, this.informacion);
+        this.sesionActual.addMensaje(mensaje, true);
         this.salida.println(mensaje);
     }
 
     public String recibirMensaje() throws IOException {
         String mensaje = this.entrada.readLine();
-        this.sesionActual.addMensaje(mensaje, this.informacion);    // TODO: Ver como obtener la informacion del emisor
-
-
+        this.sesionActual.addMensaje(mensaje, false);
         return mensaje;
     }
 

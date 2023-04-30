@@ -13,23 +13,16 @@ import controller.ControladorChat;
 
 import model.Usuario;
 
+import javax.swing.*;
+
 public class ControladorPrincipal implements ActionListener {
 
     private IVista vista;
     private static ControladorPrincipal instance;
-    Usuario usuario;
     
     private ControladorPrincipal() {
         this.vista = new VentanaPrincipal();
         this.vista.setActionListener(this);
-        
-        try {
-			usuario = Usuario.getInstance();
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
     }
     
     public static ControladorPrincipal getInstance() {
@@ -46,24 +39,23 @@ public class ControladorPrincipal implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-
-        if (comando.equalsIgnoreCase("")) {
-        	usuario.start();
-        }
-
-        if (comando.equalsIgnoreCase("SOLICITAR CHAT")) {
-            String ip = vista.getDireccionIP();
-            String puerto = vista.getPuertoIP();
-            int puertoInt = Integer.parseInt(puerto);
-
-            Informacion informacionReceptor = new Informacion(ip, puertoInt, "");
-            try {
-                usuario.solicitarChat(informacionReceptor);
-                //ControladorChat.getInstance();
-            } catch (IOException e1) {
-                e1.printStackTrace();
+        try {
+            if (comando.equalsIgnoreCase("")) {
+                Usuario.getInstance().setUsername(((VentanaPrincipal) vista).getUsername());
+                Usuario.getInstance().start();
             }
-
+            if (comando.equalsIgnoreCase("SOLICITAR CHAT")) {
+                String ip = vista.getDireccionIP();
+                String puerto = vista.getPuertoIP();
+                Usuario.getInstance().setUsername(((VentanaPrincipal) vista).getUsername());
+                int puertoInt = Integer.parseInt(puerto);
+                Informacion informacionReceptor = new Informacion(ip, puertoInt, "");
+                Usuario.getInstance().solicitarChat(informacionReceptor);
+            }
+        } catch (UnknownHostException ex1) {
+            JOptionPane.showMessageDialog(null, "ERROR: Compruebe IP ingresada.");
+        } catch (IOException ex2) {
+            JOptionPane.showMessageDialog(null, "ERROR: Compruebe Puerto e IP ingresados.");
         }
 
     }
