@@ -88,7 +88,6 @@ public class ControladorChat implements ActionListener, Runnable  {
             java.awt.Toolkit.getDefaultToolkit().beep();
             ((VentanaChat) vista).dispose();
         } catch (IOException e) {
-            System.out.println("TERMINO EL RUN DEL HILO CON EXCEPCION");
         }
     }
 
